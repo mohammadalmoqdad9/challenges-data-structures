@@ -1,0 +1,28 @@
+function MostFrequentNumber(arr) {
+    if (arr.length === 0) return null;
+    const freq = new Map();
+    const firstIndex = new Map();
+    for (let i = 0; i < arr.length; i++) {
+        const v = arr[i];
+        freq.set(v, (freq.get(v) || 0) + 1);
+        if (!firstIndex.has(v)) firstIndex.set(v, i);
+    }
+
+    let bestVal = null;
+    let bestCount = -1;
+    let bestFirstIndex = Infinity;
+
+for (const [val, count] of freq.entries())  {
+    const idx = firstIndex.get(val);
+    if (count > bestCount || (count === bestCount && idx < bestFirstIndex)) {
+        bestVal = val;
+        bestCount = count;
+        bestFirstIndex = idx;
+    }
+
+}
+return bestVal;
+}
+
+// Example
+console.log(MostFrequentNumber([4,5,6]));  // 4
